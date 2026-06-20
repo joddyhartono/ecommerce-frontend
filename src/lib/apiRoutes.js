@@ -2,4 +2,12 @@ const AUTH = {
   LOGIN: "/auth/login",
 };
 
-export { AUTH };
+const PRODUCT = {
+  FEATURED: "/products/featured",
+};
+
+const CATEGORY = {
+  FETCH: "/categories",
+};
+
+export { AUTH, PRODUCT, CATEGORY };

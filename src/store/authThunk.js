@@ -8,10 +8,11 @@ const loginThunk = createAsyncThunk("auth/login", async (form) => {
     localStorage.setItem("user", JSON.stringify(data.user));
     localStorage.setItem("token", data.token);
     return data;
-  } catch (e) {
-    if (axios.isAxiosError(e)) {
-      throw new Error(e.response?.data);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data);
     }
+    throw new Error("Something went wrong");
   }
 });
 
