@@ -1,19 +1,21 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
-import { CloudMoon, Search, ShoppingCart, UserPen } from "lucide-react";
+import { CloudMoon, Search, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import useCategories from "@/hooks/useCategories";
 import { toast } from "sonner";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import useAuth from "@/hooks/useAuth";
+import { getInitials } from "@/lib/utils";
 
 const Navbar = () => {
   const { fetchCategories } = useCategories();
+  const { logout } = useAuth();
 
   const user = useSelector((state) => state.auth.user);
   const status = useSelector((state) => state.categories.status);
   const categories = useSelector((state) => state.categories.data);
   const error = useSelector((state) => state.categories.error);
-
-  console.log(error);
 
   useEffect(() => {
     if (status === "idle") {
@@ -25,6 +27,7 @@ const Navbar = () => {
   }, [status]);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
 
   const handleMouseOver = () => {
     setIsDropdownOpen(true);
@@ -34,14 +37,18 @@ const Navbar = () => {
     setIsDropdownOpen(false);
   };
 
+  const handleLogout = async () => {
+    await logout();
+  };
+
   return (
     <nav className="flex justify-between bg-background p-4 border-b border-border sticky top-0 z-50">
-      <div className="flex items-center gap-1 cursor-pointer">
+      <Link className="flex items-center gap-1 cursor-pointer" to="/">
         <CloudMoon className="text-foreground" width={20} height={20} />
         <span className="text-foreground font-semibold text-lg tracking-widest">
           Noir
         </span>
-      </div>
+      </Link>
       <div className="hidden md:flex gap-4 items-center">
         <Link
           to="/"
@@ -94,12 +101,34 @@ const Navbar = () => {
             >
               <ShoppingCart width={20} height={20} />
             </Link>
-            <Link
-              to="/profile"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+            <div
+              className="relative"
+              onMouseLeave={() => setIsAvatarDropdownOpen(false)}
             >
-              <UserPen width={20} height={20} />
-            </Link>
+              <Avatar
+                onClick={() => setIsAvatarDropdownOpen(!isAvatarDropdownOpen)}
+                className="cursor-pointer"
+              >
+                <AvatarImage src={user?.image} alt={user?.name} />
+                <AvatarFallback>{getInitials(user?.name)}</AvatarFallback>
+              </Avatar>
+              {isAvatarDropdownOpen && (
+                <div className="absolute top-full right-0 bg-background p-4 flex flex-col gap-3 min-w-32">
+                  <Link
+                    to="/profile"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors text-left"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </>
         ) : (
           <>

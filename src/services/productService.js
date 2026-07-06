@@ -7,4 +7,20 @@ const getFeaturedProducts = async () => {
   return response.data;
 };
 
-export { getFeaturedProducts };
+const getProducts = async (categoryId = null) => {
+  setAxiosHeader();
+  const response = await instance.get(PRODUCT.FETCH, {
+    params: {
+      categoryId: categoryId,
+    },
+  });
+  return response.data;
+};
+
+const getProduct = async (productId) => {
+  setAxiosHeader();
+  const response = await instance.get(PRODUCT.DETAIL(productId));
+  return response.data;
+};
+
+export { getFeaturedProducts, getProducts, getProduct };

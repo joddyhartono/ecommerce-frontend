@@ -12,6 +12,7 @@ const HeroSection = () => {
       <Link
         className={cn(buttonVariants({ variant: "secondary" }), "mt-8")}
         variant="secondary"
+        to="/products"
       >
         Shop Now
       </Link>

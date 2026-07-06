@@ -4,6 +4,10 @@ const AUTH = {
 
 const PRODUCT = {
   FEATURED: "/products/featured",
+  FETCH: "/products",
+  DETAIL: (id) => {
+    return `/products/${id}`;
+  },
 };
 
 const CATEGORY = {
