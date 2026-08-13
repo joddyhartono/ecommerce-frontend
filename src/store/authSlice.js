@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginThunk } from "./authThunk";
+import { loginThunk, updateProfileThunk } from "./authThunk";
 
 const authSlice = createSlice({
   name: "auth",
@@ -24,9 +24,16 @@ const authSlice = createSlice({
       state.user = {};
       state.token = "";
     });
+    builder.addCase(updateProfileThunk.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
   },
 });
 
 export const { logout } = authSlice.actions;
+
+export const selectLoginData = (state) => {
+  return state.auth.user;
+};
 
 export default authSlice.reducer;

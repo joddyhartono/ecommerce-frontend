@@ -14,4 +14,8 @@ const CATEGORY = {
   FETCH: "/categories",
 };
 
-export { AUTH, PRODUCT, CATEGORY };
+const PROFILE = {
+  UPDATE: "/profile",
+};
+
+export { AUTH, PRODUCT, CATEGORY, PROFILE };
