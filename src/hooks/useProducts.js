@@ -8,11 +8,12 @@ const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [searchParams] = useSearchParams();
   const categoryId = searchParams.get("category");
+  const search = searchParams.get("search");
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await getProducts(categoryId);
+        const data = await getProducts(categoryId, search);
         if (data) {
           setProducts(data);
         }
@@ -25,7 +26,7 @@ const useProducts = () => {
       }
     };
     fetchProducts();
-  }, [categoryId]);
+  }, [categoryId, search]);
 
   return {
     products,

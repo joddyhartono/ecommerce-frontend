@@ -18,6 +18,8 @@ const ProfilePage = () => {
     name: user?.name,
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
@@ -35,7 +37,13 @@ const ProfilePage = () => {
 
   const handleSubmit = async (e) => {
     try {
+      setIsSubmitting(true);
       e.preventDefault();
+
+      if (!form.name.trim()) {
+        toast.error("Name cannot be empty!");
+        return;
+      }
 
       const payload = {
         ...form,
@@ -46,8 +54,12 @@ const ProfilePage = () => {
       };
 
       await updateProfile(payload);
+
+      toast.success("Profile successfully updated!");
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -57,6 +69,12 @@ const ProfilePage = () => {
         className="flex flex-col items-center gap-6 w-full max-w-md p-6 border rounded-lg shadow-sm"
         onSubmit={handleSubmit}
       >
+        <div className="text-center mb-2">
+          <h1 className="text-xl font-semibold">Edit Profile</h1>
+          <p className="text-sm text-muted-foreground">
+            Update your photo and display name
+          </p>
+        </div>
         <Avatar
           className="w-32 h-32 cursor-pointer"
           onClick={() => {
@@ -84,7 +102,9 @@ const ProfilePage = () => {
             onChange={handleChange}
           />
         </div>
-        <Button className="w-full cursor-pointer">Save Changes</Button>
+        <Button className="w-full cursor-pointer" disabled={isSubmitting}>
+          Save Changes
+        </Button>
       </form>
     </div>
   );

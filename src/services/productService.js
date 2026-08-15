@@ -7,11 +7,12 @@ const getFeaturedProducts = async () => {
   return response.data;
 };
 
-const getProducts = async (categoryId = null) => {
+const getProducts = async (categoryId = null, search = "") => {
   setAxiosHeader();
   const response = await instance.get(PRODUCT.FETCH, {
     params: {
       categoryId: categoryId,
+      search: search,
     },
   });
   return response.data;

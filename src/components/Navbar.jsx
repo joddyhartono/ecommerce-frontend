@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
-import { CloudMoon, Search, ShoppingCart } from "lucide-react";
+import { Link, useNavigate } from "react-router";
+import { CloudMoon, Search, ShoppingCart, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import useCategories from "@/hooks/useCategories";
 import { toast } from "sonner";
@@ -11,6 +11,7 @@ import { getInitials } from "@/lib/utils";
 const Navbar = () => {
   const { fetchCategories } = useCategories();
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.user);
   const status = useSelector((state) => state.categories.status);
@@ -28,6 +29,8 @@ const Navbar = () => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
+  const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
+  const [query, setQuery] = useState("");
 
   const handleMouseOver = () => {
     setIsDropdownOpen(true);
@@ -35,6 +38,26 @@ const Navbar = () => {
 
   const handleMouseLeave = () => {
     setIsDropdownOpen(false);
+  };
+
+  const handleClick = () => {
+    setIsSearchBarOpen(!isSearchBarOpen);
+  };
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!query.trim()) {
+      return;
+    }
+
+    navigate(`/products?search=${query}`);
+    setQuery("");
+    setIsSearchBarOpen(false);
   };
 
   const handleLogout = async () => {
@@ -87,12 +110,33 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center relative">
         <Search
           width={20}
           height={20}
           className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          onClick={handleClick}
         />
+
+        {isSearchBarOpen && (
+          <div className="absolute top-full right-0 bg-background flex gap-3 p-3">
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                className="outline-none text-sm bg-transparent"
+                autoFocus
+                onChange={handleChange}
+                value={query}
+              />
+            </form>
+            <X
+              width={20}
+              height={20}
+              className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+              onClick={handleClick}
+            />
+          </div>
+        )}
         {user ? (
           <>
             <Link
