@@ -18,4 +18,8 @@ const PROFILE = {
   UPDATE: "/profile",
 };
 
-export { AUTH, PRODUCT, CATEGORY, PROFILE };
+const CART = {
+  FETCH: "/cart",
+};
+
+export { AUTH, PRODUCT, CATEGORY, PROFILE, CART };

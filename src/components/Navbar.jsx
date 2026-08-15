@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useAuth from "@/hooks/useAuth";
 import { getInitials } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   const { fetchCategories } = useCategories();
@@ -67,7 +68,7 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between bg-background p-4 border-b border-border sticky top-0 z-50">
       <Link className="flex items-center gap-1 cursor-pointer" to="/">
-        <CloudMoon className="text-foreground" width={20} height={20} />
+        <CloudMoon className="text-foreground" size={20} />
         <span className="text-foreground font-semibold text-lg tracking-widest">
           Noir
         </span>
@@ -112,8 +113,7 @@ const Navbar = () => {
       </div>
       <div className="flex gap-4 items-center relative">
         <Search
-          width={20}
-          height={20}
+          size={20}
           className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
           onClick={handleClick}
         />
@@ -129,12 +129,12 @@ const Navbar = () => {
                 value={query}
               />
             </form>
-            <X
-              width={20}
-              height={20}
-              className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-              onClick={handleClick}
-            />
+            <Button variant="ghost" size="icon" onClick={handleClick}>
+              <X
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                size={20}
+              />
+            </Button>
           </div>
         )}
         {user ? (
@@ -143,7 +143,7 @@ const Navbar = () => {
               to="/cart"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ShoppingCart width={20} height={20} />
+              <ShoppingCart size={20} />
             </Link>
             <div
               className="relative"

@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import ProductCard from "../ProductCard";
+import ProductCard from "./ProductCard";
 import { useSelector } from "react-redux";
 
 const ProductsSection = () => {

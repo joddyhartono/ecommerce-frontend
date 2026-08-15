@@ -7,6 +7,7 @@ import Layout from "@/layouts/Layout";
 import ProductPage from "@/pages/ProductPage";
 import ProductDetailPage from "@/pages/ProductDetailPage";
 import ProfilePage from "@/pages/ProfilePage";
+import CartPage from "@/pages/CartPage";
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
           <Route element={<ProductPage />} path="/products" />
           <Route element={<ProductDetailPage />} path="/products/:id" />
           <Route element={<ProfilePage />} path="/profile" />
+          <Route element={<CartPage />} path="/cart" />
         </Route>
       </Route>
 

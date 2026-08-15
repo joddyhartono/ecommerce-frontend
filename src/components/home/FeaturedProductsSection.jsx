@@ -1,5 +1,5 @@
 import useFeaturedProducts from "@/hooks/useFeaturedProducts";
-import ProductCard from "../ProductCard";
+import ProductCard from "../product/ProductCard";
 
 const FeaturedProductsSection = () => {
   const { featuredProducts } = useFeaturedProducts();

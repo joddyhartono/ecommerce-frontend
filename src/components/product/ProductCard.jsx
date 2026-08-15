@@ -3,7 +3,7 @@ import { toRupiah } from "@/lib/utils";
 
 const ProductCard = ({ id, imageUrl, name, price }) => {
   return (
-    <article className="">
+    <article>
       <Link
         to={`/products/${id}`}
         className="flex flex-col items-center justify-center gap-2"
