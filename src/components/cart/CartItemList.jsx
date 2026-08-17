@@ -1,12 +1,25 @@
 import CartItemCard from "./CartItemCard";
 
-const CartItemList = () => {
+const CartItemList = ({ cartItems }) => {
   return (
-    <div className="flex flex-col gap-8 items-center justify-center">
-      <CartItemCard />
-      <CartItemCard />
-      <CartItemCard />
-    </div>
+    <>
+      {cartItems.length > 0 && (
+        <div className="flex flex-col gap-8 border rounded-md">
+          {cartItems.map((cartItem) => {
+            return (
+              <CartItemCard
+                key={cartItem.id}
+                name={cartItem.product.name}
+                imageUrl={cartItem.product.imageUrl}
+                price={cartItem.price}
+                quantity={cartItem.quantity}
+                subtotal={cartItem.subtotal}
+              />
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 };
 

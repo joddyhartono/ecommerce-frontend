@@ -1,4 +1,5 @@
 import { fetchCartItemsThunk } from "@/store/cartThunk";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const useCart = () => {
@@ -6,6 +7,10 @@ const useCart = () => {
   const { cartItems } = useSelector((state) => {
     return state.cart;
   });
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
 
   const fetchCartItems = async () => {
     await dispatch(fetchCartItemsThunk());

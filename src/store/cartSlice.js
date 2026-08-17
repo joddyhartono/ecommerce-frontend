@@ -8,7 +8,7 @@ const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCartItemsThunk.fulfilled, (state, action) => {
-      state.cartItems = action.payload;
+      state.cartItems = action.payload.items;
     });
   },
 });
