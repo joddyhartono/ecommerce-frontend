@@ -20,6 +20,9 @@ const PROFILE = {
 
 const CART = {
   FETCH: "/cart",
+  ADD: (productId) => {
+    return `/cart/${productId}`;
+  },
 };
 
 export { AUTH, PRODUCT, CATEGORY, PROFILE, CART };

@@ -2,14 +2,19 @@ import { toRupiah } from "@/lib/utils";
 import { X } from "lucide-react";
 import { Button } from "../ui/button";
 
-const CartItemCard = ({ name, imageUrl, price, quantity, subtotal }) => {
-  const handleRemove = () => {};
-  const handleAdd = () => {};
-  const handleSubtract = () => {};
-
+const CartItemCard = ({
+  name,
+  imageUrl,
+  price,
+  quantity,
+  subtotal,
+  onRemove,
+  onAdd,
+  onSubtract,
+}) => {
   return (
     <article className="flex items-center justify-between gap-8 p-4">
-      <Button variant="ghost" size="icon" onClick={handleRemove}>
+      <Button variant="ghost" size="icon" onClick={onRemove}>
         <X
           className="text-muted-foreground hover:text-foreground transition-colors"
           size={20}
@@ -19,11 +24,11 @@ const CartItemCard = ({ name, imageUrl, price, quantity, subtotal }) => {
       <span>{name}</span>
       <span>{toRupiah(price)}</span>
       <div className="flex items-center justify-center gap-6">
-        <Button variant="ghost" size="icon" onClick={handleSubtract}>
+        <Button variant="ghost" size="icon" onClick={onSubtract}>
           -
         </Button>
         <span>{quantity}</span>
-        <Button variant="ghost" size="icon" onClick={handleAdd}>
+        <Button variant="ghost" size="icon" onClick={onAdd}>
           +
         </Button>
       </div>

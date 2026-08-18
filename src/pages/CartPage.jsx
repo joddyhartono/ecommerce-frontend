@@ -30,7 +30,7 @@ const CartPage = () => {
       <span className="text-sm text-muted-foreground">
         {cartItems?.length} products
       </span>
-      <div className="flex flex-col lg:flex-row gap-8 items-start">
+      <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1">
           <CartItemList cartItems={cartItems} />
         </div>

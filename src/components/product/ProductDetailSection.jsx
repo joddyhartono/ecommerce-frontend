@@ -9,9 +9,19 @@ import {
 import useProductDetail from "@/hooks/useProductDetail";
 import { cn, toRupiah } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
+import useCart from "@/hooks/useCart";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 const ProductDetailSection = () => {
   const { product } = useProductDetail();
+  const { handleAddToCart } = useCart();
+  const { id } = useParams();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const isInCart = cartItems.some(
+    (cartItem) => cartItem.product.id === Number(id),
+  );
 
   return (
     <section className="flex flex-col p-8 gap-8">
@@ -50,6 +60,10 @@ const ProductDetailSection = () => {
                 buttonVariants({ size: "lg" }),
                 "w-full cursor-pointer",
               )}
+              onClick={() => {
+                return handleAddToCart(id);
+              }}
+              disabled={isInCart}
             >
               Add to Cart
             </button>

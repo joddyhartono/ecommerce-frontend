@@ -7,4 +7,10 @@ const getCartItems = async () => {
   return response.data;
 };
 
-export { getCartItems };
+const addToCart = async (productId) => {
+  setAxiosHeader();
+  const response = await instance.post(CART.ADD(productId));
+  return response.data;
+};
+
+export { getCartItems, addToCart };
