@@ -1,4 +1,8 @@
-import { addToCart, getCartItems } from "@/services/cartService";
+import {
+  addToCart,
+  getCartItems,
+  removeFromCart,
+} from "@/services/cartService";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -29,4 +33,19 @@ const addToCartThunk = createAsyncThunk("cart/addToCart", async (productId) => {
   }
 });
 
-export { fetchCartItemsThunk, addToCartThunk };
+const removeFromCartThunk = createAsyncThunk(
+  "cart/removeFromCart",
+  async (productId) => {
+    try {
+      await removeFromCart(productId);
+      return productId;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        throw new Error(error.response?.data);
+      }
+      throw new Error("Something went wrong");
+    }
+  },
+);
+
+export { fetchCartItemsThunk, addToCartThunk, removeFromCartThunk };

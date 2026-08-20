@@ -13,4 +13,10 @@ const addToCart = async (productId) => {
   return response.data;
 };
 
-export { getCartItems, addToCart };
+const removeFromCart = async (productId) => {
+  setAxiosHeader();
+  const response = await instance.delete(CART.REMOVE(productId));
+  return response.data;
+};
+
+export { getCartItems, addToCart, removeFromCart };

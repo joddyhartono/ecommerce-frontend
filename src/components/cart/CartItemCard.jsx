@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import { Button } from "../ui/button";
 
 const CartItemCard = ({
+  id,
   name,
   imageUrl,
   price,
@@ -14,7 +15,13 @@ const CartItemCard = ({
 }) => {
   return (
     <article className="flex items-center justify-between gap-8 p-4">
-      <Button variant="ghost" size="icon" onClick={onRemove}>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => {
+          onRemove(id);
+        }}
+      >
         <X
           className="text-muted-foreground hover:text-foreground transition-colors"
           size={20}

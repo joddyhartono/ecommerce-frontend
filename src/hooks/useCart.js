@@ -1,5 +1,8 @@
-import { addToCart } from "@/services/cartService";
-import { addToCartThunk, fetchCartItemsThunk } from "@/store/cartThunk";
+import {
+  addToCartThunk,
+  fetchCartItemsThunk,
+  removeFromCartThunk,
+} from "@/store/cartThunk";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -29,8 +32,8 @@ const useCart = () => {
     await dispatch(decrementQuantityThunk());
   };
 
-  const handleRemove = async () => {
-    await dispatch(removeFromCartThunk());
+  const handleRemove = async (productId) => {
+    await dispatch(removeFromCartThunk(productId));
   };
 
   return {

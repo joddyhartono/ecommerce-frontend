@@ -1,6 +1,6 @@
 import CartItemCard from "./CartItemCard";
 
-const CartItemList = ({ cartItems }) => {
+const CartItemList = ({ cartItems, onRemove }) => {
   return (
     <>
       {cartItems.length > 0 && (
@@ -9,11 +9,13 @@ const CartItemList = ({ cartItems }) => {
             return (
               <CartItemCard
                 key={cartItem.id}
+                id={cartItem.id}
                 name={cartItem.product.name}
                 imageUrl={cartItem.product.imageUrl}
                 price={cartItem.price}
                 quantity={cartItem.quantity}
                 subtotal={cartItem.subtotal}
+                onRemove={onRemove}
               />
             );
           })}

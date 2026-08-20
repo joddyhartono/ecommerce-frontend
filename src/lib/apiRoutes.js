@@ -23,6 +23,9 @@ const CART = {
   ADD: (productId) => {
     return `/cart/${productId}`;
   },
+  REMOVE: (productId) => {
+    return `/cart/${productId}`;
+  },
 };
 
 export { AUTH, PRODUCT, CATEGORY, PROFILE, CART };

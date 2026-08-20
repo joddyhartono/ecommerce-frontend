@@ -11,7 +11,7 @@ import CartItemList from "@/components/cart/CartItemList";
 import OrderSummary from "@/components/cart/OrderSummary";
 
 const CartPage = () => {
-  const { cartItems } = useCart();
+  const { cartItems, handleRemove } = useCart();
 
   return (
     <section className="flex flex-col p-8 gap-8">
@@ -32,7 +32,7 @@ const CartPage = () => {
       </span>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1">
-          <CartItemList cartItems={cartItems} />
+          <CartItemList cartItems={cartItems} onRemove={handleRemove} />
         </div>
         <div className="w-full lg:w-80">
           <OrderSummary cartItems={cartItems} />
