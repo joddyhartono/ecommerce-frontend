@@ -1,6 +1,6 @@
 import CartItemCard from "./CartItemCard";
 
-const CartItemList = ({ cartItems, onRemove }) => {
+const CartItemList = ({ cartItems, onRemove, onIncrement, onDecrement }) => {
   return (
     <>
       {cartItems.length > 0 && (
@@ -16,6 +16,8 @@ const CartItemList = ({ cartItems, onRemove }) => {
                 quantity={cartItem.quantity}
                 subtotal={cartItem.subtotal}
                 onRemove={onRemove}
+                onIncrement={onIncrement}
+                onDecrement={onDecrement}
               />
             );
           })}

@@ -25,7 +25,7 @@ const OrderSummary = ({ cartItems }) => {
             <span>Total</span>
             <span>{toRupiah(total)}</span>
           </div>
-          <Button>Checkout</Button>
+          <Button className="cursor-pointer">Checkout</Button>
         </div>
       )}
     </>

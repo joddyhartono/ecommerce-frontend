@@ -23,8 +23,14 @@ const CART = {
   ADD: (productId) => {
     return `/cart/${productId}`;
   },
-  REMOVE: (productId) => {
-    return `/cart/${productId}`;
+  REMOVE: (cartItemId) => {
+    return `/cart/${cartItemId}`;
+  },
+  INCREMENT: (cartItemId) => {
+    return `/cart/${cartItemId}/increment`;
+  },
+  DECREMENT: (cartItemId) => {
+    return `/cart/${cartItemId}/decrement`;
   },
 };
 

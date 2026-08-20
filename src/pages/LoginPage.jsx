@@ -63,7 +63,9 @@ const LoginPage = () => {
             onChange={handleChange}
           />
         </div>
-        <Button type="submit">Login</Button>
+        <Button type="submit" className="cursor-pointer">
+          Login
+        </Button>
         <p className="text-sm text-center text-muted-foreground">
           Don't have an account?{" "}
           <Link to="/register" className="underline text-foreground">

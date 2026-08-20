@@ -13,10 +13,28 @@ const addToCart = async (productId) => {
   return response.data;
 };
 
-const removeFromCart = async (productId) => {
+const removeFromCart = async (cartItemId) => {
   setAxiosHeader();
-  const response = await instance.delete(CART.REMOVE(productId));
+  const response = await instance.delete(CART.REMOVE(cartItemId));
   return response.data;
 };
 
-export { getCartItems, addToCart, removeFromCart };
+const incrementQuantity = async (cartItemId) => {
+  setAxiosHeader();
+  const response = await instance.put(CART.INCREMENT(cartItemId));
+  return response.data;
+};
+
+const decrementQuantity = async (cartItemId) => {
+  setAxiosHeader();
+  const response = await instance.put(CART.DECREMENT(cartItemId));
+  return response.data;
+};
+
+export {
+  getCartItems,
+  addToCart,
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+};

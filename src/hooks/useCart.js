@@ -1,6 +1,8 @@
 import {
   addToCartThunk,
+  decrementQuantityThunk,
   fetchCartItemsThunk,
+  incrementQuantityThunk,
   removeFromCartThunk,
 } from "@/store/cartThunk";
 import { useEffect } from "react";
@@ -24,16 +26,17 @@ const useCart = () => {
     await dispatch(addToCartThunk(productId));
   };
 
-  const handleIncrement = async () => {
-    await dispatch(incrementQuantityThunk());
+  const handleIncrement = async (cartItemId) => {
+    console.log("handleIncrement called with:", cartItemId); // tambahin ini
+    await dispatch(incrementQuantityThunk(cartItemId));
   };
 
-  const handleDecrement = async () => {
-    await dispatch(decrementQuantityThunk());
+  const handleDecrement = async (cartItemId) => {
+    await dispatch(decrementQuantityThunk(cartItemId));
   };
 
-  const handleRemove = async (productId) => {
-    await dispatch(removeFromCartThunk(productId));
+  const handleRemove = async (cartItemId) => {
+    await dispatch(removeFromCartThunk(cartItemId));
   };
 
   return {

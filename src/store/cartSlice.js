@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addToCartThunk,
+  decrementQuantityThunk,
   fetchCartItemsThunk,
+  incrementQuantityThunk,
   removeFromCartThunk,
 } from "./cartThunk";
 
@@ -22,8 +24,17 @@ const cartSlice = createSlice({
         return cartItem.id !== action.payload;
       });
     });
+    builder.addCase(incrementQuantityThunk.fulfilled, (state, action) => {
+      state.cartItems = state.cartItems.map((cartItem) =>
+        cartItem.id === action.payload.id ? action.payload : cartItem,
+      );
+    });
+    builder.addCase(decrementQuantityThunk.fulfilled, (state, action) => {
+      state.cartItems = state.cartItems.map((cartItem) =>
+        cartItem.id === action.payload.id ? action.payload : cartItem,
+      );
+    });
   },
 });
 
-export const { setCartItems } = cartSlice.actions;
 export default cartSlice.reducer;

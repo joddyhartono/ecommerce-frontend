@@ -10,8 +10,8 @@ const CartItemCard = ({
   quantity,
   subtotal,
   onRemove,
-  onAdd,
-  onSubtract,
+  onIncrement,
+  onDecrement,
 }) => {
   return (
     <article className="flex items-center justify-between gap-8 p-4">
@@ -21,6 +21,7 @@ const CartItemCard = ({
         onClick={() => {
           onRemove(id);
         }}
+        className="cursor-pointer"
       >
         <X
           className="text-muted-foreground hover:text-foreground transition-colors"
@@ -31,11 +32,31 @@ const CartItemCard = ({
       <span>{name}</span>
       <span>{toRupiah(price)}</span>
       <div className="flex items-center justify-center gap-6">
-        <Button variant="ghost" size="icon" onClick={onSubtract}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={
+            quantity === 1
+              ? () => {
+                  onRemove(id);
+                }
+              : () => {
+                  onDecrement(id);
+                }
+          }
+          className="cursor-pointer"
+        >
           -
         </Button>
         <span>{quantity}</span>
-        <Button variant="ghost" size="icon" onClick={onAdd}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => {
+            onIncrement(id);
+          }}
+          className="cursor-pointer"
+        >
           +
         </Button>
       </div>

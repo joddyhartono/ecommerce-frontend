@@ -129,7 +129,12 @@ const Navbar = () => {
                 value={query}
               />
             </form>
-            <Button variant="ghost" size="icon" onClick={handleClick}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleClick}
+              className="cursor-pointer"
+            >
               <X
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 size={20}
@@ -166,7 +171,7 @@ const Navbar = () => {
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors text-left"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors text-left cursor-pointer"
                   >
                     Logout
                   </button>
