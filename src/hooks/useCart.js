@@ -27,7 +27,6 @@ const useCart = () => {
   };
 
   const handleIncrement = async (cartItemId) => {
-    console.log("handleIncrement called with:", cartItemId); // tambahin ini
     await dispatch(incrementQuantityThunk(cartItemId));
   };
 

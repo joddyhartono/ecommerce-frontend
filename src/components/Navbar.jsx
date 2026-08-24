@@ -8,9 +8,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useAuth from "@/hooks/useAuth";
 import { getInitials } from "@/lib/utils";
 import { Button } from "./ui/button";
+import useCart from "@/hooks/useCart";
 
 const Navbar = () => {
   const { fetchCategories } = useCategories();
+  const { fetchCartItems } = useCart();
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -18,6 +20,8 @@ const Navbar = () => {
   const status = useSelector((state) => state.categories.status);
   const categories = useSelector((state) => state.categories.data);
   const error = useSelector((state) => state.categories.error);
+
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
     if (status === "idle") {
@@ -27,6 +31,12 @@ const Navbar = () => {
       toast.error(error);
     }
   }, [status]);
+
+  useEffect(() => {
+    if (user) {
+      fetchCartItems();
+    }
+  }, []);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
@@ -146,9 +156,14 @@ const Navbar = () => {
           <>
             <Link
               to="/cart"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors relative"
             >
               <ShoppingCart size={20} />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
             </Link>
             <div
               className="relative"
