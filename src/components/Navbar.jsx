@@ -12,7 +12,7 @@ import useCart from "@/hooks/useCart";
 
 const Navbar = () => {
   const { fetchCategories } = useCategories();
-  const { fetchCartItems } = useCart();
+  const { fetchCart } = useCart();
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const Navbar = () => {
   const categories = useSelector((state) => state.categories.data);
   const error = useSelector((state) => state.categories.error);
 
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const items = useSelector((state) => state.cart.items);
 
   useEffect(() => {
     if (status === "idle") {
@@ -34,7 +34,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (user) {
-      fetchCartItems();
+      fetchCart();
     }
   }, []);
 
@@ -159,9 +159,9 @@ const Navbar = () => {
               className="text-muted-foreground hover:text-foreground transition-colors relative"
             >
               <ShoppingCart size={20} />
-              {cartItems.length > 0 && (
+              {items.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                  {cartItems.length}
+                  {items.length}
                 </span>
               )}
             </Link>

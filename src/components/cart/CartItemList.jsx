@@ -1,20 +1,20 @@
 import CartItemCard from "./CartItemCard";
 
-const CartItemList = ({ cartItems, onRemove, onIncrement, onDecrement }) => {
+const CartItemList = ({ items, onRemove, onIncrement, onDecrement }) => {
   return (
     <>
-      {cartItems.length > 0 && (
+      {items.length > 0 && (
         <div className="flex flex-col gap-8 border rounded-md">
-          {cartItems.map((cartItem) => {
+          {items.map((item) => {
             return (
               <CartItemCard
-                key={cartItem.id}
-                id={cartItem.id}
-                name={cartItem.product.name}
-                imageUrl={cartItem.product.imageUrl}
-                price={cartItem.price}
-                quantity={cartItem.quantity}
-                subtotal={cartItem.subtotal}
+                key={item.id}
+                id={item.id}
+                name={item.product.name}
+                imageUrl={item.product.imageUrl}
+                price={item.price}
+                quantity={item.quantity}
+                subtotal={item.subtotal}
                 onRemove={onRemove}
                 onIncrement={onIncrement}
                 onDecrement={onDecrement}

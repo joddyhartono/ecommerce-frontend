@@ -1,7 +1,7 @@
 import { CART } from "@/lib/apiRoutes";
 import instance, { setAxiosHeader } from "@/lib/axiosInstance";
 
-const getCartItems = async () => {
+const getCart = async () => {
   setAxiosHeader();
   const response = await instance.get(CART.FETCH);
   return response.data;
@@ -32,7 +32,7 @@ const decrementQuantity = async (cartItemId) => {
 };
 
 export {
-  getCartItems,
+  getCart,
   addToCart,
   removeFromCart,
   incrementQuantity,

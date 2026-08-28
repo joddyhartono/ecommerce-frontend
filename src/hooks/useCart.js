@@ -1,7 +1,7 @@
 import {
   addToCartThunk,
   decrementQuantityThunk,
-  fetchCartItemsThunk,
+  fetchCartThunk,
   incrementQuantityThunk,
   removeFromCartThunk,
 } from "@/store/cartThunk";
@@ -10,37 +10,38 @@ import { useDispatch, useSelector } from "react-redux";
 
 const useCart = () => {
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => {
+  const { id, items } = useSelector((state) => {
     return state.cart;
   });
 
   useEffect(() => {
-    fetchCartItems();
+    fetchCart();
   }, []);
 
-  const fetchCartItems = async () => {
-    await dispatch(fetchCartItemsThunk());
+  const fetchCart = async () => {
+    await dispatch(fetchCartThunk());
   };
 
   const handleAddToCart = async (productId) => {
     await dispatch(addToCartThunk(productId));
   };
 
-  const handleIncrement = async (cartItemId) => {
-    await dispatch(incrementQuantityThunk(cartItemId));
+  const handleIncrement = async (itemId) => {
+    await dispatch(incrementQuantityThunk(itemId));
   };
 
-  const handleDecrement = async (cartItemId) => {
-    await dispatch(decrementQuantityThunk(cartItemId));
+  const handleDecrement = async (itemId) => {
+    await dispatch(decrementQuantityThunk(itemId));
   };
 
-  const handleRemove = async (cartItemId) => {
-    await dispatch(removeFromCartThunk(cartItemId));
+  const handleRemove = async (itemId) => {
+    await dispatch(removeFromCartThunk(itemId));
   };
 
   return {
-    cartItems,
-    fetchCartItems,
+    id,
+    items,
+    fetchCart,
     handleAddToCart,
     handleIncrement,
     handleDecrement,

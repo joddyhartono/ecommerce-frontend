@@ -14,7 +14,7 @@ const CartItemCard = ({
   onDecrement,
 }) => {
   return (
-    <article className="flex items-center justify-between gap-8 p-4">
+    <article className="flex lg:flex-row flex-col items-center justify-between gap-8 p-4">
       <Button
         variant="ghost"
         size="icon"

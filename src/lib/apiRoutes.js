@@ -34,4 +34,6 @@ const CART = {
   },
 };
 
-export { AUTH, PRODUCT, CATEGORY, PROFILE, CART };
+const CHECKOUT = "/checkout";
+
+export { AUTH, PRODUCT, CATEGORY, PROFILE, CART, CHECKOUT };

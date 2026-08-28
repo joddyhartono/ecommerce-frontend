@@ -1,23 +1,23 @@
 import { toRupiah } from "@/lib/utils";
 import { Button } from "../ui/button";
 
-const OrderSummary = ({ cartItems }) => {
-  const total = cartItems.reduce((accumulator, cartItem) => {
-    return accumulator + cartItem.subtotal;
+const OrderSummary = ({ items, onCheckout }) => {
+  const total = items.reduce((accumulator, item) => {
+    return accumulator + item.subtotal;
   }, 0);
 
   return (
     <>
-      {cartItems.length > 0 && (
+      {items.length > 0 && (
         <div className="flex flex-col gap-4 border rounded-md p-4">
-          {cartItems.map((cartItem) => {
+          {items.map((item) => {
             return (
               <div
                 className="flex flex-row justify-between items-center"
-                key={cartItem.product.id}
+                key={item.product.id}
               >
-                <span>{cartItem.product.name}</span>
-                <span>{cartItem.quantity}x</span>
+                <span>{item.product.name}</span>
+                <span>{item.quantity}x</span>
               </div>
             );
           })}
@@ -25,7 +25,9 @@ const OrderSummary = ({ cartItems }) => {
             <span>Total</span>
             <span>{toRupiah(total)}</span>
           </div>
-          <Button className="cursor-pointer">Checkout</Button>
+          <Button className="cursor-pointer" onClick={onCheckout}>
+            Checkout
+          </Button>
         </div>
       )}
     </>
