@@ -1,7 +1,7 @@
 import { toRupiah } from "@/lib/utils";
 import { Button } from "../ui/button";
 
-const OrderSummary = ({ items, onCheckout }) => {
+const OrderSummary = ({ items, onSubmit }) => {
   const total = items.reduce((accumulator, item) => {
     return accumulator + item.subtotal;
   }, 0);
@@ -25,7 +25,7 @@ const OrderSummary = ({ items, onCheckout }) => {
             <span>Total</span>
             <span>{toRupiah(total)}</span>
           </div>
-          <Button className="cursor-pointer" onClick={onCheckout}>
+          <Button className="cursor-pointer" onClick={onSubmit}>
             Checkout
           </Button>
         </div>

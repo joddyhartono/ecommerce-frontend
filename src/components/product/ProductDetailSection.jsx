@@ -17,11 +17,9 @@ const ProductDetailSection = () => {
   const { product } = useProductDetail();
   const { handleAddToCart } = useCart();
   const { id } = useParams();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const items = useSelector((state) => state.cart.items);
 
-  const isInCart = cartItems.some(
-    (cartItem) => cartItem.product.id === Number(id),
-  );
+  const isInCart = items.some((item) => item.product.id === Number(id));
 
   return (
     <section className="flex flex-col p-8 gap-8">

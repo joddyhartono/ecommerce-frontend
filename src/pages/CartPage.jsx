@@ -9,14 +9,15 @@ import {
 import useCart from "@/hooks/useCart";
 import CartItemList from "@/components/cart/CartItemList";
 import OrderSummary from "@/components/cart/OrderSummary";
-import useMidtransSnap from "@/hooks/useMidtransSnap";
-import useCheckout from "@/hooks/useCheckout";
+import { useNavigate } from "react-router";
 
 const CartPage = () => {
-  const { id, items, handleRemove, handleIncrement, handleDecrement } =
-    useCart();
-  const { handleCheckout } = useCheckout();
-  useMidtransSnap();
+  const { items, handleRemove, handleIncrement, handleDecrement } = useCart();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/checkout");
+  };
 
   return (
     <section className="flex flex-col p-8 gap-8">
@@ -45,12 +46,7 @@ const CartPage = () => {
           />
         </div>
         <div className="w-full lg:w-80">
-          <OrderSummary
-            items={items}
-            onCheckout={() => {
-              handleCheckout(id);
-            }}
-          />
+          <OrderSummary items={items} onSubmit={handleClick} />
         </div>
       </div>
     </section>

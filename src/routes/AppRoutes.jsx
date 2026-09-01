@@ -8,6 +8,8 @@ import ProductPage from "@/pages/ProductPage";
 import ProductDetailPage from "@/pages/ProductDetailPage";
 import ProfilePage from "@/pages/ProfilePage";
 import CartPage from "@/pages/CartPage";
+import CheckoutPage from "@/pages/CheckoutPage";
+import OrderDetailPage from "@/pages/OrderDetailPage";
 
 const AppRoutes = () => {
   return (
@@ -19,6 +21,8 @@ const AppRoutes = () => {
           <Route element={<ProductDetailPage />} path="/products/:id" />
           <Route element={<ProfilePage />} path="/profile" />
           <Route element={<CartPage />} path="/cart" />
+          <Route element={<CheckoutPage />} path="/checkout" />
+          <Route element={<OrderDetailPage />} path="/checkout" />
         </Route>
       </Route>
 

@@ -2,9 +2,9 @@ import { checkout } from "@/services/checkoutService";
 import axios from "axios";
 
 const useCheckout = () => {
-  const handleCheckout = async (cart) => {
+  const handleCheckout = async (cartId, address) => {
     try {
-      const data = await checkout(cart);
+      const data = await checkout(cartId, address);
       return data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
