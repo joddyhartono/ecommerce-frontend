@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useCart from "@/hooks/useCart";
 import useCheckout from "@/hooks/useCheckout";
+import useMidtransSnap from "@/hooks/useMidtransSnap";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -10,6 +11,7 @@ const CheckoutPage = () => {
   const [address, setAddress] = useState("");
   const { id, items } = useCart();
   const { handleCheckout } = useCheckout();
+  useMidtransSnap();
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -21,7 +23,17 @@ const CheckoutPage = () => {
 
     const data = await handleCheckout(id, address);
     if (data?.token) {
-      window.snap.pay(data.token);
+      window.snap.pay(data.token, {
+        onSuccess: function () {
+          toast.success("Payment successful!");
+        },
+        onError: function () {
+          toast.error("Payment failed!");
+        },
+        onClose: function () {
+          toast.info("Payment cancelled");
+        },
+      });
     }
   };
 

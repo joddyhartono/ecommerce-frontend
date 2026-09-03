@@ -11,4 +11,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/midtrans": {
+        target: "http://localhost:5136",
+        changeOrigin: true,
+      },
+    },
+    allowedHosts: ["envoy-bronze-sprout.ngrok-free.dev"],
+  },
 });
