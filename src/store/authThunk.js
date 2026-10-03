@@ -41,7 +41,7 @@ const registerThunk = createAsyncThunk("auth/register", async (form) => {
     const data = await registerUser(form);
     localStorage.setItem("user", JSON.stringify(data.user));
     localStorage.setItem("token", data.token);
-    return;
+    return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.data);

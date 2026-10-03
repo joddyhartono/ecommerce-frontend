@@ -24,7 +24,7 @@ const LoginPage = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setErrors({
-      ...form,
+      ...errors,
       [e.target.name]: e.target.value
         ? ""
         : `The ${e.target.name} field is required`,
