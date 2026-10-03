@@ -1,4 +1,4 @@
-import { loginThunk } from "@/store/authThunk";
+import { loginThunk, registerThunk } from "@/store/authThunk";
 import { logout as logoutAction } from "@/store/authSlice";
 import { useDispatch } from "react-redux";
 
@@ -13,9 +13,14 @@ const useAuth = () => {
     await dispatch(logoutAction());
   };
 
+  const register = async (form) => {
+    await dispatch(registerThunk(form)).unwrap();
+  };
+
   return {
     login,
     logout,
+    register,
   };
 };
 

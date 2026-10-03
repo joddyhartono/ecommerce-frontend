@@ -6,4 +6,9 @@ const loginUser = async (form) => {
   return response.data;
 };
 
-export { loginUser };
+const registerUser = async (form) => {
+  const response = await instance.post(AUTH.REGISTER, form);
+  return response.data;
+};
+
+export { loginUser, registerUser };

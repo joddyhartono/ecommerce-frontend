@@ -10,6 +10,7 @@ import ProfilePage from "@/pages/ProfilePage";
 import CartPage from "@/pages/CartPage";
 import CheckoutPage from "@/pages/CheckoutPage";
 import OrderDetailPage from "@/pages/OrderDetailPage";
+import RegisterPage from "@/pages/RegisterPage";
 
 const AppRoutes = () => {
   return (
@@ -28,6 +29,7 @@ const AppRoutes = () => {
 
       <Route element={<PublicRoute />}>
         <Route element={<LoginPage />} path="/login" />
+        <Route element={<RegisterPage />} path="/register" />
       </Route>
     </Routes>
   );

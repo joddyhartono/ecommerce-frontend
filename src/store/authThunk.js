@@ -1,4 +1,4 @@
-import { loginUser } from "@/services/authService";
+import { loginUser, registerUser } from "@/services/authService";
 import { updateProfile } from "@/services/profileService";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -36,4 +36,18 @@ const updateProfileThunk = createAsyncThunk("auth/update", async (form) => {
   }
 });
 
-export { loginThunk, updateProfileThunk };
+const registerThunk = createAsyncThunk("auth/register", async (form) => {
+  try {
+    const data = await registerUser(form);
+    localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("token", data.token);
+    return;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data);
+    }
+    throw new Error("Something went wrong");
+  }
+});
+
+export { loginThunk, updateProfileThunk, registerThunk };

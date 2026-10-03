@@ -6,25 +6,27 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
-const LoginPage = () => {
-  const { login } = useAuth();
-
-  const navigate = useNavigate();
+const RegisterPage = () => {
+  const { register } = useAuth();
 
   const [form, setForm] = useState({
+    name: "",
     email: "",
     password: "",
   });
 
   const [errors, setErrors] = useState({
+    name: "",
     email: "",
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setErrors({
-      ...form,
+      ...errors,
       [e.target.name]: e.target.value
         ? ""
         : `The ${e.target.name} field is required`,
@@ -41,6 +43,10 @@ const LoginPage = () => {
       }));
     }
 
+    if (!form.name) {
+      setErrors((prev) => ({ ...prev, name: "The name field is required" }));
+    }
+
     if (!form.password) {
       setErrors((prev) => ({
         ...prev,
@@ -48,12 +54,12 @@ const LoginPage = () => {
       }));
     }
 
-    if (!form.email || !form.password) {
+    if (!form.name || !form.email || !form.password) {
       return;
     }
 
     try {
-      await login(form);
+      await register(form);
       navigate("/");
     } catch (error) {
       toast.error(error.message);
@@ -67,10 +73,25 @@ const LoginPage = () => {
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-semibold">Sign in</h1>
+          <h1 className="text-2xl font-semibold">Sign up</h1>
           <p className="text-sm text-muted-foreground">
-            Welcome back! Enter your details to continue shopping.
+            Create an account to start shopping.
           </p>
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="name" className={errors.name && "text-red-500"}>
+            Name
+          </Label>
+          <Input
+            id="name"
+            name="name"
+            placeholder="John Doe"
+            onChange={handleChange}
+            className={errors.name && "border-red-500 text-red-500"}
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+          )}
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="email" className={errors.email && "text-red-500"}>
@@ -108,12 +129,12 @@ const LoginPage = () => {
           )}
         </div>
         <Button type="submit" className="cursor-pointer">
-          Login
+          Register
         </Button>
         <p className="text-sm text-center text-muted-foreground">
-          Don't have an account?{" "}
-          <Link to="/register" className="underline text-foreground">
-            Register
+          Already have an account?{" "}
+          <Link to="/login" className="underline text-foreground">
+            Login
           </Link>
         </p>
       </form>
@@ -121,4 +142,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

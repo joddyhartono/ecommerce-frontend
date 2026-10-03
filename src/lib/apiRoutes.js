@@ -1,5 +1,6 @@
 const AUTH = {
   LOGIN: "/auth/login",
+  REGISTER: "/auth/register",
 };
 
 const PRODUCT = {

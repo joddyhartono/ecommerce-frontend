@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginThunk, updateProfileThunk } from "./authThunk";
+import { loginThunk, registerThunk, updateProfileThunk } from "./authThunk";
 
 const authSlice = createSlice({
   name: "auth",
@@ -26,6 +26,14 @@ const authSlice = createSlice({
     });
     builder.addCase(updateProfileThunk.fulfilled, (state, action) => {
       state.user = action.payload;
+    });
+    builder.addCase(registerThunk.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+    });
+    builder.addCase(registerThunk.rejected, (state) => {
+      state.user = {};
+      state.token = "";
     });
   },
 });
