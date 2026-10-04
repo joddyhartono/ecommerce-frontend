@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginThunk, registerThunk, updateProfileThunk } from "./authThunk";
+import {
+  loginThunk,
+  openShopThunk,
+  registerThunk,
+  updateProfileThunk,
+} from "./authThunk";
 
 const authSlice = createSlice({
   name: "auth",
@@ -34,6 +39,9 @@ const authSlice = createSlice({
     builder.addCase(registerThunk.rejected, (state) => {
       state.user = {};
       state.token = "";
+    });
+    builder.addCase(openShopThunk.fulfilled, (state) => {
+      state.user = { ...state.user, isSeller: true };
     });
   },
 });

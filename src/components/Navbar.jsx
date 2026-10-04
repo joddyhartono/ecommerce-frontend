@@ -184,6 +184,12 @@ const Navbar = () => {
                   >
                     Profile
                   </Link>
+                  <Link
+                    to={user.isSeller ? "/seller/dashboard" : "/seller/open"}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {user.isSeller ? "My Shop" : "Open Shop"}
+                  </Link>
                   <button
                     onClick={handleLogout}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors text-left cursor-pointer"

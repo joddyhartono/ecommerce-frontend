@@ -82,6 +82,7 @@ const LoginPage = () => {
             type="email"
             placeholder="you@example.com"
             onChange={handleChange}
+            value={form.email}
             className={errors.email && "border-red-500 text-red-500"}
           />
           {errors.email && (
@@ -100,6 +101,7 @@ const LoginPage = () => {
             name="password"
             type="password"
             placeholder="••••••••"
+            value={form.password}
             onChange={handleChange}
             className={errors.password && "border-red-500 text-red-500"}
           />

@@ -18,7 +18,7 @@ const ProfilePage = () => {
     name: user?.name,
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const fileInputRef = useRef(null);
 
@@ -32,19 +32,20 @@ const ProfilePage = () => {
       };
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
+      setError(e.target.value ? "" : "The name field is required");
     }
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setError(form.name ? "" : "The name field is required");
+
+    if (form.name === user?.name && form.image === user?.image) {
+      return;
+    }
+
     try {
-      setIsSubmitting(true);
-      e.preventDefault();
-
-      if (!form.name.trim()) {
-        toast.error("Name cannot be empty!");
-        return;
-      }
-
       const payload = {
         ...form,
         image: form.image?.includes(",")
@@ -58,8 +59,6 @@ const ProfilePage = () => {
       toast.success("Profile successfully updated!");
     } catch (error) {
       toast.error(error.message);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -93,18 +92,23 @@ const ProfilePage = () => {
           className="hidden"
         />
         <div className="flex flex-col gap-2 w-full">
-          <Label htmlFor="name">Name</Label>
+          <Label
+            htmlFor="name"
+            className={error ? "border-red-500 text-red-500" : ""}
+          >
+            Name
+          </Label>
           <Input
             id="name"
             name="name"
             value={form.name}
             placeholder="John Doe"
             onChange={handleChange}
+            className={error ? "border-red-500 text-red-500" : ""}
           />
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
         </div>
-        <Button className="w-full cursor-pointer" disabled={isSubmitting}>
-          Save Changes
-        </Button>
+        <Button className="w-full cursor-pointer">Save Changes</Button>
       </form>
     </div>
   );

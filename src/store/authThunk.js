@@ -1,5 +1,6 @@
 import { loginUser, registerUser } from "@/services/authService";
 import { updateProfile } from "@/services/profileService";
+import { openShop } from "@/services/sellerService";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -50,4 +51,18 @@ const registerThunk = createAsyncThunk("auth/register", async (form) => {
   }
 });
 
-export { loginThunk, updateProfileThunk, registerThunk };
+const openShopThunk = createAsyncThunk("auth/openShop", async (form) => {
+  try {
+    const data = await openShop(form);
+    const stored = JSON.parse(localStorage.getItem("user") || "{}");
+    localStorage.setItem("user", JSON.stringify({ ...stored, isSeller: true }));
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data);
+    }
+    throw new Error("Something went wrong");
+  }
+});
+
+export { loginThunk, updateProfileThunk, registerThunk, openShopThunk };

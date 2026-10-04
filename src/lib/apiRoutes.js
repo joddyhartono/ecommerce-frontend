@@ -37,4 +37,8 @@ const CART = {
 
 const CHECKOUT = "/checkout";
 
-export { AUTH, PRODUCT, CATEGORY, PROFILE, CART, CHECKOUT };
+const SELLER = {
+  OPEN: "/seller/open",
+};
+
+export { AUTH, PRODUCT, CATEGORY, PROFILE, CART, CHECKOUT, SELLER };
