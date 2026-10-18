@@ -1,5 +1,11 @@
+import OrderDetailSection from "@/components/order/OrderDetailSection";
+
 const OrderDetailPage = () => {
-  return <div></div>;
+  return (
+    <>
+      <OrderDetailSection />
+    </>
+  );
 };
 
 export default OrderDetailPage;

@@ -13,6 +13,7 @@ import OrderDetailPage from "@/pages/OrderDetailPage";
 import RegisterPage from "@/pages/RegisterPage";
 import OpenShopPage from "@/pages/OpenShopPage";
 import SellerDashboardPage from "@/pages/SellerDashboardPage";
+import OrderHistoryPage from "@/pages/OrderHistoryPage";
 
 const AppRoutes = () => {
   return (
@@ -25,7 +26,8 @@ const AppRoutes = () => {
           <Route element={<ProfilePage />} path="/profile" />
           <Route element={<CartPage />} path="/cart" />
           <Route element={<CheckoutPage />} path="/checkout" />
-          <Route element={<OrderDetailPage />} path="/orders" />
+          <Route element={<OrderHistoryPage />} path="/orders" />
+          <Route element={<OrderDetailPage />} path="/orders/:id" />
           <Route element={<OpenShopPage />} path="/seller/open" />
           <Route element={<SellerDashboardPage />} path="/seller/dashboard" />
         </Route>

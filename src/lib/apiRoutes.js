@@ -41,4 +41,11 @@ const SELLER = {
   OPEN: "/seller/open",
 };
 
-export { AUTH, PRODUCT, CATEGORY, PROFILE, CART, CHECKOUT, SELLER };
+const ORDER = {
+  FETCH: "/orders",
+  DETAIL: (id) => {
+    return `/orders/${id}`;
+  },
+};
+
+export { AUTH, PRODUCT, CATEGORY, PROFILE, CART, CHECKOUT, SELLER, ORDER };
