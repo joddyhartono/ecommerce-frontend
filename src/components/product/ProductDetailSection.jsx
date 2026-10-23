@@ -7,11 +7,12 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import useProductDetail from "@/hooks/useProductDetail";
-import { cn, toRupiah } from "@/lib/utils";
+import { cn, getInitials, toRupiah } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import useCart from "@/hooks/useCart";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useSelector } from "react-redux";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const ProductDetailSection = () => {
   const { product } = useProductDetail();
@@ -46,6 +47,20 @@ const ProductDetailSection = () => {
           <div className="flex flex-col justify-start items-start gap-4">
             <div className="flex flex-col gap-2 pb-4 border-b border-muted-foreground">
               <h1 className="text-2xl font-semibold">{product?.name}</h1>
+              <div className="flex justify-start items-center gap-2">
+                <span className="text-md text-muted-foreground/70">by</span>
+                <Link to={`/sellers/${product?.seller.id}`}>
+                  <Avatar>
+                    <AvatarImage
+                      src={product?.seller.image}
+                      alt={product?.seller.name}
+                    />
+                    <AvatarFallback>
+                      {getInitials(product?.seller.name)}
+                    </AvatarFallback>
+                  </Avatar>
+                </Link>
+              </div>
               <h2 className="text-lg text-muted-foreground">
                 {toRupiah(product?.price)}
               </h2>

@@ -18,6 +18,7 @@ const FeaturedProductsSection = () => {
               imageUrl={product.imageUrl}
               name={product.name}
               price={product.price}
+              seller={product.seller}
             />
           ))}
         </div>
