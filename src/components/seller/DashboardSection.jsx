@@ -13,7 +13,7 @@ import ProductCard from "../product/ProductCard";
 import useSellerProducts from "@/hooks/useSellerProducts";
 
 const DashboardSection = () => {
-  const { products } = useSellerProducts();
+  const { products, handleDelete } = useSellerProducts();
 
   return (
     <section className="flex flex-col p-8 gap-8">
@@ -47,6 +47,9 @@ const DashboardSection = () => {
               imageUrl={product.imageUrl}
               name={product.name}
               price={product.price}
+              onDelete={() => {
+                handleDelete(product.id);
+              }}
             />
           ))}
         </div>

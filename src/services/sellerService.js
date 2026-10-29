@@ -13,4 +13,10 @@ const getProducts = async () => {
   return response.data;
 };
 
-export { openShop, getProducts };
+const deleteProduct = async (productId) => {
+  setAxiosHeader();
+  const response = await instance.put(SELLER.DELETE(productId));
+  return response.data;
+};
+
+export { openShop, getProducts, deleteProduct };

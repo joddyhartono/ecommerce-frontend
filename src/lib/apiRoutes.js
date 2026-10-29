@@ -40,6 +40,9 @@ const CHECKOUT = "/checkout";
 const SELLER = {
   OPEN: "/seller/open",
   FETCH: "/seller/products",
+  DELETE: (productId) => {
+    return `/seller/products/${productId}`;
+  },
 };
 
 const ORDER = {

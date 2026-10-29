@@ -1,4 +1,4 @@
-import { getProducts } from "@/services/sellerService";
+import { deleteProduct, getProducts } from "@/services/sellerService";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -24,8 +24,23 @@ const useSellerProducts = () => {
     fetchProducts();
   }, []);
 
+  const handleDelete = async (productId) => {
+    try {
+      const data = await deleteProduct(productId);
+      toast.success("Product successfully deleted!");
+      setProducts((prev) => prev.filter((p) => p.id !== productId));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data);
+      } else {
+        toast.error("Something went wrong");
+      }
+    }
+  };
+
   return {
     products,
+    handleDelete,
   };
 };
 
