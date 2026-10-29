@@ -1,7 +1,9 @@
+import DashboardSection from "@/components/seller/DashboardSection";
+
 const SellerDashboardPage = () => {
   return (
     <>
-      <h1>Hello</h1>
+      <DashboardSection />
     </>
   );
 };

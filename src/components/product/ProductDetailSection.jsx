@@ -49,7 +49,7 @@ const ProductDetailSection = () => {
               <h1 className="text-2xl font-semibold">{product?.name}</h1>
               <div className="flex justify-start items-center gap-2">
                 <span className="text-md text-muted-foreground/70">by</span>
-                <Link to={`/sellers/${product?.seller.id}`}>
+                <Link to={`/seller/${product?.seller.id}`}>
                   <Avatar>
                     <AvatarImage
                       src={product?.seller.image}

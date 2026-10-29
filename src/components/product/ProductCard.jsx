@@ -1,6 +1,7 @@
 import { Link } from "react-router";
-import { getInitials, toRupiah } from "@/lib/utils";
+import { cn, getInitials, toRupiah } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
+import { Button, buttonVariants } from "../ui/button";
 
 const ProductCard = ({ id, imageUrl, name, price, seller }) => {
   return (
@@ -17,12 +18,28 @@ const ProductCard = ({ id, imageUrl, name, price, seller }) => {
           />
         </div>
         <h3 className="text-lg font-medium text-foreground">{name}</h3>
-        <div className="flex items-center justify-center gap-2">
-          <span className="text-xs text-muted-foreground/70">by</span>
-          <Avatar>
-            <AvatarImage src={seller.image} alt={seller.name} />
-            <AvatarFallback>{getInitials(seller.name)}</AvatarFallback>
-          </Avatar>
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-2">
+          {seller ? (
+            <>
+              <span className="text-xs text-muted-foreground/70">by</span>
+              <Avatar>
+                <AvatarImage src={seller?.image} alt={seller?.name} />
+                <AvatarFallback>{getInitials(seller?.name)}</AvatarFallback>
+              </Avatar>
+            </>
+          ) : (
+            <>
+              <Link
+                to={`/dashboard/seller/edit/${id}`}
+                className={cn(buttonVariants(), "bg-yellow-500 cursor-pointer")}
+              >
+                Edit Product
+              </Link>
+              <Button className={cn("bg-red-500 cursor-pointer")}>
+                Delete Product
+              </Button>
+            </>
+          )}
         </div>
         <p className="text-sm text-muted-foreground">{toRupiah(price)}</p>
       </Link>

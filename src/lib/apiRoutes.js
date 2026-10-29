@@ -39,6 +39,7 @@ const CHECKOUT = "/checkout";
 
 const SELLER = {
   OPEN: "/seller/open",
+  FETCH: "/seller/products",
 };
 
 const ORDER = {
