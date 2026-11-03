@@ -53,7 +53,7 @@ const OrderDetailSection = () => {
                 className="flex lg:flex-row flex-col items-center justify-between w-full gap-8 p-4"
               >
                 <img
-                  src={item.product.imageUrl}
+                  src={item.product.image}
                   alt={item.product.name}
                   className="w-30 h-30 object-cover"
                 />

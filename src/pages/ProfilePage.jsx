@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useProfile from "@/hooks/useProfile";
-import { getInitials } from "@/lib/utils";
+import { getInitials, toImageSrc } from "@/lib/utils";
 import { selectLoginData } from "@/store/authSlice";
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -14,6 +14,7 @@ const ProfilePage = () => {
   const { updateProfile } = useProfile();
 
   const [form, setForm] = useState({
+    email: user?.email,
     image: user?.image,
     name: user?.name,
   });
@@ -28,7 +29,8 @@ const ProfilePage = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        setForm({ ...form, [e.target.name]: reader.result });
+        const base64 = reader.result.split(",")[1];
+        setForm({ ...form, [e.target.name]: base64 });
       };
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
@@ -45,17 +47,12 @@ const ProfilePage = () => {
       return;
     }
 
+    if (!form.name) {
+      return;
+    }
+
     try {
-      const payload = {
-        ...form,
-        image: form.image?.includes(",")
-          ? form.image.split(",")[1]
-          : form.image,
-        email: user?.email,
-      };
-
-      await updateProfile(payload);
-
+      await updateProfile(form);
       toast.success("Profile successfully updated!");
     } catch (error) {
       toast.error(error.message);
@@ -80,7 +77,7 @@ const ProfilePage = () => {
             return fileInputRef.current?.click();
           }}
         >
-          <AvatarImage src={form.image} alt={form.name} />
+          <AvatarImage src={toImageSrc(form.image)} alt={form.name} />
           <AvatarFallback>{getInitials(form.name)}</AvatarFallback>
         </Avatar>
         <input

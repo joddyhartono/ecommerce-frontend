@@ -1,11 +1,11 @@
-import { toRupiah } from "@/lib/utils";
+import { toImageSrc, toRupiah } from "@/lib/utils";
 import { X } from "lucide-react";
 import { Button } from "../ui/button";
 
 const CartItemCard = ({
   id,
   name,
-  imageUrl,
+  image,
   price,
   quantity,
   subtotal,
@@ -28,7 +28,11 @@ const CartItemCard = ({
           size={20}
         />
       </Button>
-      <img src={imageUrl} alt={name} className="w-30 h-30 object-cover" />
+      <img
+        src={toImageSrc(image)}
+        alt={name}
+        className="w-30 h-30 object-cover"
+      />
       <span>{name}</span>
       <span>{toRupiah(price)}</span>
       <div className="flex items-center justify-center gap-6">

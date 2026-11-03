@@ -26,6 +26,7 @@ const updateProfileThunk = createAsyncThunk("auth/update", async (form) => {
       email: data.email,
       name: data.name,
       image: data.image,
+      isSeller: data.isSeller,
     };
     localStorage.setItem("user", JSON.stringify(user));
     return data;

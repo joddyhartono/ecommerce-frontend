@@ -15,7 +15,7 @@ const FeaturedProductsSection = () => {
             <ProductCard
               key={product.id}
               id={product.id}
-              imageUrl={product.imageUrl}
+              image={product.image}
               name={product.name}
               price={product.price}
               seller={product.seller}

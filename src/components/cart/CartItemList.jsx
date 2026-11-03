@@ -11,7 +11,7 @@ const CartItemList = ({ items, onRemove, onIncrement, onDecrement }) => {
                 key={item.id}
                 id={item.id}
                 name={item.product.name}
-                imageUrl={item.product.imageUrl}
+                image={item.product.image}
                 price={item.price}
                 quantity={item.quantity}
                 subtotal={item.subtotal}

@@ -7,7 +7,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import useProductDetail from "@/hooks/useProductDetail";
-import { cn, getInitials, toRupiah } from "@/lib/utils";
+import { cn, getInitials, toRupiah, toImageSrc } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import useCart from "@/hooks/useCart";
 import { Link, useParams } from "react-router";
@@ -39,7 +39,7 @@ const ProductDetailSection = () => {
         <div className="flex flex-col md:flex-row justify-center items-start gap-8">
           <div className="w-full md:w-1/3 aspect-3/4">
             <img
-              src={product.imageUrl}
+              src={toImageSrc(product?.image)}
               alt={product?.name}
               className="w-full h-full object-cover"
             />
@@ -52,7 +52,7 @@ const ProductDetailSection = () => {
                 <Link to={`/seller/${product?.seller.id}`}>
                   <Avatar>
                     <AvatarImage
-                      src={product?.seller.image}
+                      src={toImageSrc(product?.seller.image)}
                       alt={product?.seller.name}
                     />
                     <AvatarFallback>

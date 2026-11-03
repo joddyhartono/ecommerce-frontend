@@ -43,6 +43,12 @@ const SELLER = {
   DELETE: (productId) => {
     return `/seller/products/${productId}`;
   },
+  DETAIL: (productId) => {
+    return `/seller/products/${productId}`;
+  },
+  UPDATE: (productId) => {
+    return `/seller/products/${productId}`;
+  },
 };
 
 const ORDER = {

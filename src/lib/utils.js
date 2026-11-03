@@ -19,8 +19,44 @@ export const isTokenExpired = (token) => {
 };
 
 export const getInitials = (name) => {
-  if (!name) return "";
+  if (!name) {
+    return "";
+  }
   const words = name.split(" ");
-  if (words.length === 1) return words[0][0];
+  if (words.length === 1) {
+    return words[0][0];
+  }
   return words[0][0] + words[words.length - 1][0];
+};
+
+export const detectMimeType = (base64) => {
+  if (base64.startsWith("/9j/")) {
+    return "image/jpeg";
+  } else if (base64.startsWith("iVBOR")) {
+    return "image/png";
+  } else if (base64.startsWith("R0lGOD")) {
+    return "image/gif";
+  } else if (base64.startsWith("UklGR")) {
+    return "image/webp";
+  }
+  return "image/jpeg";
+};
+
+export const toImageSrc = (image) => {
+  if (!image) {
+    return;
+  }
+  const value = image.trim();
+  if (value.startsWith("data:")) {
+    return value;
+  } else {
+    return `data:${detectMimeType(value)};base64,${value}`;
+  }
+};
+
+export const toRawBase64 = (image) => {
+  if (!image) {
+    return;
+  }
+  return image.startsWith("data:") ? image.split(",")[1] : image;
 };

@@ -15,8 +15,20 @@ const getProducts = async () => {
 
 const deleteProduct = async (productId) => {
   setAxiosHeader();
-  const response = await instance.put(SELLER.DELETE(productId));
+  const response = await instance.delete(SELLER.DELETE(productId));
   return response.data;
 };
 
-export { openShop, getProducts, deleteProduct };
+const getProduct = async (productId) => {
+  setAxiosHeader();
+  const response = await instance.get(SELLER.DETAIL(productId));
+  return response.data;
+};
+
+const editProduct = async (product) => {
+  setAxiosHeader();
+  const response = await instance.put(SELLER.UPDATE(product.id), product);
+  return response.data;
+};
+
+export { openShop, getProducts, deleteProduct, getProduct, editProduct };

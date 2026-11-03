@@ -1,9 +1,10 @@
 import { Link } from "react-router";
-import { cn, getInitials, toRupiah } from "@/lib/utils";
+import { cn, getInitials, toRupiah, toImageSrc } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import { Button, buttonVariants } from "../ui/button";
+import { SquarePen, Trash } from "lucide-react";
 
-const ProductCard = ({ id, imageUrl, name, price, seller, onDelete }) => {
+const ProductCard = ({ id, image, name, price, seller, onDelete }) => {
   return (
     <article>
       <Link
@@ -12,7 +13,7 @@ const ProductCard = ({ id, imageUrl, name, price, seller, onDelete }) => {
       >
         <div className="w-full aspect-3/4">
           <img
-            src={imageUrl}
+            src={toImageSrc(image)}
             alt={name}
             className="w-full h-full object-cover"
           />
@@ -34,16 +35,16 @@ const ProductCard = ({ id, imageUrl, name, price, seller, onDelete }) => {
       {!seller && (
         <div className="flex flex-col lg:flex-row items-center justify-center gap-2 mt-2">
           <Link
-            to={`/dashboard/seller/edit/${id}`}
+            to={`/seller/products/${id}/edit`}
             className={cn(buttonVariants(), "bg-yellow-500 cursor-pointer")}
           >
-            Edit Product
+            <SquarePen />
           </Link>
           <Button
             className={cn("bg-red-500 cursor-pointer")}
             onClick={onDelete}
           >
-            Delete Product
+            <Trash />
           </Button>
         </div>
       )}

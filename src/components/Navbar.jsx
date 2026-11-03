@@ -6,7 +6,7 @@ import useCategories from "@/hooks/useCategories";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useAuth from "@/hooks/useAuth";
-import { getInitials } from "@/lib/utils";
+import { getInitials, toImageSrc } from "@/lib/utils";
 import { Button } from "./ui/button";
 import useCart from "@/hooks/useCart";
 
@@ -173,7 +173,7 @@ const Navbar = () => {
                 onClick={() => setIsAvatarDropdownOpen(!isAvatarDropdownOpen)}
                 className="cursor-pointer"
               >
-                <AvatarImage src={user?.image} alt={user?.name} />
+                <AvatarImage src={toImageSrc(user?.image)} alt={user?.name} />
                 <AvatarFallback>{getInitials(user?.name)}</AvatarFallback>
               </Avatar>
               {isAvatarDropdownOpen && (
