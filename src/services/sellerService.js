@@ -31,4 +31,17 @@ const editProduct = async (product) => {
   return response.data;
 };
 
-export { openShop, getProducts, deleteProduct, getProduct, editProduct };
+const makeProduct = async (product) => {
+  setAxiosHeader();
+  const response = await instance.post(SELLER.CREATE, product);
+  return response.data;
+};
+
+export {
+  openShop,
+  getProducts,
+  deleteProduct,
+  getProduct,
+  editProduct,
+  makeProduct,
+};

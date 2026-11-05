@@ -18,9 +18,9 @@ const EditProductPage = () => {
   const handleSubmit = async (form) => {
     const success = await updateProduct(form);
     if (success) {
+      toast.success("Product successfully updated!");
       navigate("/seller/dashboard");
     }
-    toast.success("Product successfully updated!");
   };
 
   return (

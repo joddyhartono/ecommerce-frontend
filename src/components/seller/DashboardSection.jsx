@@ -11,6 +11,7 @@ import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import ProductCard from "../product/ProductCard";
 import useSellerProducts from "@/hooks/useSellerProducts";
+import { Plus } from "lucide-react";
 
 const DashboardSection = () => {
   const { products, handleDelete } = useSellerProducts();
@@ -29,14 +30,22 @@ const DashboardSection = () => {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <Link
-          className={cn(
-            buttonVariants({ variant: "default" }),
-            "cursor-pointer",
-          )}
-        >
-          Edit Shop Profile
-        </Link>
+        <div className="flex justify-between items-center gap-2">
+          <Link
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "cursor-pointer",
+            )}
+          >
+            Edit Shop Profile
+          </Link>
+          <Link
+            to={`/seller/products/create`}
+            className={cn(buttonVariants(), "bg-green-500 cursor-pointer")}
+          >
+            <Plus />
+          </Link>
+        </div>
       </div>
       {products && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

@@ -49,6 +49,7 @@ const SELLER = {
   UPDATE: (productId) => {
     return `/seller/products/${productId}`;
   },
+  CREATE: "/seller/products",
 };
 
 const ORDER = {

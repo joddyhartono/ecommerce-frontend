@@ -15,6 +15,7 @@ import OpenShopPage from "@/pages/OpenShopPage";
 import SellerDashboardPage from "@/pages/SellerDashboardPage";
 import OrderHistoryPage from "@/pages/OrderHistoryPage";
 import EditProductPage from "@/pages/EditProductPage";
+import CreateProductPage from "@/pages/CreateProductPage";
 
 const AppRoutes = () => {
   return (
@@ -34,6 +35,10 @@ const AppRoutes = () => {
           <Route
             element={<EditProductPage />}
             path="/seller/products/:id/edit"
+          />
+          <Route
+            element={<CreateProductPage />}
+            path="/seller/products/create"
           />
         </Route>
       </Route>

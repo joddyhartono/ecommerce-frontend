@@ -1,4 +1,4 @@
-import { editProduct, getProduct } from "@/services/sellerService";
+import { editProduct, getProduct, makeProduct } from "@/services/sellerService";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -9,6 +9,9 @@ const useSellerProductDetail = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    if (!id) {
+      return;
+    }
     fetchProduct();
   }, [id]);
 
@@ -44,9 +47,27 @@ const useSellerProductDetail = () => {
     }
   };
 
+  const createProduct = async (form) => {
+    try {
+      const data = await makeProduct(form);
+      if (data) {
+        setProduct(data);
+      }
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data);
+      } else {
+        toast.error("Something went wrong");
+      }
+      return null;
+    }
+  };
+
   return {
     product,
     updateProduct,
+    createProduct,
   };
 };
 

@@ -135,7 +135,9 @@ const ProductForm = ({ handleSubmit, submitLabel, product = null }) => {
       }}
     >
       <div className="flex flex-col gap-2">
-        <Label>Category</Label>
+        <Label className={errors.categoryId ? "text-red-500" : ""}>
+          Category
+        </Label>
         <Combobox
           items={categories}
           itemToStringLabel={(category) => category.name}
@@ -143,9 +145,16 @@ const ProductForm = ({ handleSubmit, submitLabel, product = null }) => {
           value={selectedCategory}
           onValueChange={(category) => {
             setForm({ ...form, categoryId: category.id });
+            setErrors((prev) => ({
+              ...prev,
+              categoryId: category ? "" : "The description field is required",
+            }));
           }}
         >
-          <ComboboxInput placeholder="Select a category" />
+          <ComboboxInput
+            placeholder="Select a category"
+            className={cn(errors.categoryId && "border-red-500 text-red-500")}
+          />
           <ComboboxContent>
             <ComboboxEmpty>No items found.</ComboboxEmpty>
             <ComboboxList>
@@ -168,6 +177,7 @@ const ProductForm = ({ handleSubmit, submitLabel, product = null }) => {
           onChange={handleChange}
           name="name"
           className={errors.name && "border-red-500 text-red-500"}
+          placeholder={"John Doe"}
         />
         {errors.name && (
           <p className="text-red-500 text-sm mt-1">{errors.name}</p>
@@ -194,6 +204,7 @@ const ProductForm = ({ handleSubmit, submitLabel, product = null }) => {
           onChange={handleChange}
           name="price"
           className={errors.price && "border-red-500 text-red-500"}
+          placeholder={"100000"}
         />
         {errors.price && (
           <p className="text-red-500 text-sm mt-1">{errors.price}</p>
@@ -212,7 +223,12 @@ const ProductForm = ({ handleSubmit, submitLabel, product = null }) => {
               errors.image && "text-red-500",
             )}
           />
-          <div className="w-30 h-30 rounded-md border flex items-center justify-center">
+          <div
+            className={cn(
+              "w-30 h-30 rounded-md border flex items-center justify-center",
+              errors.image && "border-red-500 text-red-500",
+            )}
+          >
             {form.image ? (
               <img
                 src={toImageSrc(form.image)}
@@ -220,7 +236,14 @@ const ProductForm = ({ handleSubmit, submitLabel, product = null }) => {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <span className="text-xs text-muted-foreground">No image</span>
+              <span
+                className={cn(
+                  "text-xs text-muted-foreground",
+                  errors.image && "border-red-500 text-red-500",
+                )}
+              >
+                No image
+              </span>
             )}
           </div>
         </div>
